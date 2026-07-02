@@ -1,372 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanket Udgirkar | Full Stack Python Developer</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <title>Portfolio</title>
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        header {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-  <!-- Custom fonts for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 20px;
+        }
 
-  <!-- Custom styles for this template -->
-  <link href="css/resume.min.css" rel="stylesheet">
+        @media (min-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1.5fr 1fr;
+            }
+        }
 
+        .hero-text h1 {
+            font-size: 2.8rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Avatar / Video Presentation Section */
+        .media-showcase {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .media-container {
+            position: relative;
+            width: 100%;
+            padding-top: 177.77%; /* 9:16 Aspect Ratio matching the portrait avatar aspect ratio */
+            background: #000;
+        }
+
+        .media-container video, .media-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .media-label {
+            padding: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(30, 41, 59, 0.5);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Main Layout */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 900px) {
+            main {
+                grid-template-columns: 3fr 1fr;
+            }
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h3.section-title {
+            font-size: 1.6rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Timeline / Experience Items */
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 5px;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .item-org {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .item-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tech-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Skills Sidebar */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
+<body>
 
-<body id="page-top" onload="loadFunction()">
-<div id="loader"></div>
+    <header>
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Sanket Udgirkar</h1>
+                <h2>Full Stack Python Developer</h2>
+                <div class="contact-info">
+                    <span>📍 Pune, Maharashtra, India</span>
+                    <span>📞 <a href="tel:+918805941662">8805941662</a></span>
+                    <span>✉️ <a href="mailto:sanket.udgirkar@gmail.com">sanket.udgirkar@gmail.com</a></span>
+                </div>
+                <p class="bio">
+                    Hi, I am a Full Stack Python Developer with 6+ years of experience working with major technologies like Python, Flask, Django, VueJs, ReactJs, PostgreSQL, MongoDb, and more. Passionate about continuous learning, architectural clean code, and driving tangible results in highly innovative environments.
+                </p>
+            </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">Sanket Udgirkar</span>
-      <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="images/profile.jpg" alt="Sanket Udgirkar">
-      </span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" style="float: right" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <span class="d-block d-lg-none">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" style="max-height: 150px" src="images/profile.jpg" alt="Sanket Udgirkar">
-      </span>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#activity">activity</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="container-fluid p-0" id="mainContent">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
-      <div class="w-100">
-        <h1 class="mb-0">Sanket Udgirkar
-        </h1>
-        <div class="subheading mb-5"><a href="https://goo.gl/maps/Sd4RBjEZo8iqPP8n8" target="_blank">"Shobha Smruti" Plot No.9, Deep Nagar, Purna Road, Nanded</a> -
-          <a href="mailto:sanket.udgirkar@gmail.com" target="_blank">sanket.udgirkar@gmail.com</a> -
-          <a href="tel:+917972958174" target="_blank">+91 7972 95 8174</a>
+            <!-- Profile Media Showcase Container -->
+            <div class="media-showcase">
+                <div class="media-container">
+                    <!-- HTML5 Video Component with fallback to custom caricature image -->
+                    <video id="introVideo" controls poster="Gemini_Generated_Image_29d0kk29d0kk29d0.png" preload="metadata">
+                        <source src="intro_video.mp4" type="video/mp4">
+                        <!-- Standard fallback img natively uses image asset if video element fails -->
+                        <img src="Gemini_Generated_Image_29d0kk29d0kk29d0.png" alt="Sanket Udgirkar Digital Avatar">
+                    </video>
+                </div>
+                <div class="media-label">
+                    🎬 Video Introduction / Profile Avatar
+                </div>
+            </div>
         </div>
-        <p class="lead mb-5">I am a Full-Stack Python Developer with hands-on experience developing full-fledged solutions for healthcare/pharmaceutical industry. With about 2 Years of experience working on live projects.</p>
-        <div class="social-icons">
-          <a href="https://www.linkedin.com/in/sanket-udgirkar-681239164" target="_blank">
-            <i class="fab fa-linkedin-in" title="LinkedIn"></i>
-          </a>
-          <a href="https://github.com/udgirkarsanket" target="_blank">
-            <i class="fab fa-github" title="Github"></i>
-          </a>
-          <a href="https://twitter.com/SUdgirkar?s=08" target="_blank">
-            <i class="fab fa-twitter" title="Twitter"></i>
-          </a>
-        </div>
-        <a href="pdf/Resume.pdf" download="Resume.pdf" class="btn btn-flat rounded-pill" style="background: #bd5d38;color:white;margin-top: 15px" target="_blank">
-        Download Resume
-        </a>
-      </div>
-    </section>
+    </header>
 
-    <hr class="m-0">
+    <main>
+        <div class="left-column">
+            <!-- Experience Section -->
+            <section id="experience">
+                <h3 class="section-title">Professional Experience</h3>
+                
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <span class="item-title">Deputy Manager</span> • <span class="item-org">VOIS</span>
+                        </div>
+                        <span class="item-date">11/2024 - Present</span>
+                    </div>
+                </div>
 
-    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
-      <div class="w-100">
-        <h2 class="mb-5">Experience</h2>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <span class="item-title">Senior Software Engineer</span> • <span class="item-org">Cloud9Space</span>
+                        </div>
+                        <span class="item-date">05/2024 - 11/2024</span>
+                    </div>
+                </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0"><img src="images/incentius.png" height="30px" width="30px">&nbsp;&nbsp;solutions Developer</h3>
-            <div class="subheading mb-3">Incentius</div>
-            <p>Working as a full stack developer with responsibility to develop and maintain multiple solutions including data-warehouse,crm and sales tracking systems.</p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">July 2019 - Present</span>
-          </div>
-        </div>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <span class="item-title">Solutions Developer</span> • <span class="item-org">Incentius</span>
+                        </div>
+                        <span class="item-date">11/2018 - 04/2024</span>
+                    </div>
+                </div>
+            </section>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0"><img src="images/incentius.png" height="30px" width="30px">&nbsp;&nbsp;Solutions Developer Intern</h3>
-            <div class="subheading mb-3">Incentius</div>
-            <p>Working as a intern i learnt required technologies and my responsibility was to develop solutions for few live projects.</p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">November 2018 - July 2019</span>
-          </div>
-        </div>
+            <!-- Projects Section -->
+            <section id="projects">
+                <h3 class="section-title">Projects</h3>
+                <div class="projects-grid">
+                    
+                    <div class="project-card">
+                        <h4>CRM & Reporting Tool</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">A large platform tracking customer relations, client analytics, sales management, and integrated email marketing automation. Spearheaded requirement analysis and end-to-end backend solutioning.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span><span class="tech-badge">Flask</span><span class="tech-badge">AWS</span><span class="tech-badge">Angular 1.7</span><span class="tech-badge">PostgreSQL</span>
+                        </div>
+                    </div>
 
-      </div>
+                    <div class="project-card">
+                        <h4>Market Access Dashboard</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">Market analysis platform analyzing prospective clients, providing scalable visualization solutions tracking data trends relative to industry competitors.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span><span class="tech-badge">Flask</span><span class="tech-badge">AWS S3</span><span class="tech-badge">AngularJs</span>
+                        </div>
+                    </div>
 
-    </section>
+                    <div class="project-card">
+                        <h4>Sales and Inventory Management System</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">Freelance operational infrastructure engineered for a specialized trading firm allowing modular tracking of core inventory, continuous updates, automated quotations, and instant billing generation.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Django</span><span class="tech-badge">VueJs</span><span class="tech-badge">MongoDb</span>
+                        </div>
+                    </div>
 
-    <hr class="m-0">
+                    <div class="project-card">
+                        <h4>Enterprise Data Warehouse</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">Data pipelining matrix designed for a prominent pharmaceutical organization to centralize consumer logs, execute structural reporting, and feed planning analytical modules.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Apache Airflow</span><span class="tech-badge">PostgreSQL</span><span class="tech-badge">Python</span>
+                        </div>
+                    </div>
 
-    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="projects">
-      <div class="w-100">
-        <h2 class="mb-5">Projects</h2>
+                    <div class="project-card">
+                        <h4>Online Consulting Platform</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">Interactive communications stack establishing instant synchronization portals linking professional mentors and active trainees via streaming video calls and resource databases.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">ReactJs</span><span class="tech-badge">Python</span><span class="tech-badge">MongoDb</span>
+                        </div>
+                    </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="col-6 d-inline-block p-0">Enterprise Data Warehouse for Pharma</h3><h5 class="col-6 d-inline-block text-right">Jan-2020 to Present</h5>
-            <h5>Major Technologies: Python-3.7, Apache Airflow, Pandas, Redshift, AWS Services(S3,Glue,SES,etc)</h5>
-            <p>As name suggest this is a warehouse project which includes features like data pipeline, data processing and data warehousing. this system is also used for other dependent project as a data source and it provides up-to-date information regarding the prescriber, consumer universe for a large pharmaceutical company. It also works as a Reporting Tool, Marketing Tool, Email Platform, etc.</p>
-            <p><strong>My Role:</strong> In this project my role is to develop a Data Warehouse project which includes Processes like MDM(Master Database Management),DCR(Data Change Request), DS(Data Stewarding),etc.</p>
-          </div>
-        </div>
+                    <div class="project-card">
+                        <h4>Satellite Based Monitoring Platform</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">High-performance geographic platform processing imagery streams, parcel metadata indexing, and predictive local weather analytics frameworks.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">React</span><span class="tech-badge">FastAPI</span>
+                        </div>
+                    </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="col-6 d-inline-block p-0">Sales and inventory management system</h3><h5 class="col-6 d-inline-block text-right">Jun-2020 to July-2020</h5>
-            <h5>Major Technologies: Python-3.7, Flask, Sqlalchemy, Postgres </h5>
-            <p>This platform is a web based sales and inventory tracking system which helps with seamlessly access to all stocks and sales history for the organization with additional features like B2B GST reporting and GSTIN registration tracking for easier reporting.</p>
-            <p><strong>My Role:</strong> This was a freelancing project so includes client approach, requirement analysis, database design, flow design, solution development as well as deployment of the project.</p>
-          </div>
-        </div>
+                    <div class="project-card">
+                        <h4>File Transfer Platform</h4>
+                        <p style="color: var(--text-muted); margin-top: 5px;">Automated scheduler facilitating reliable file exchanges spanning multi-cloud infrastructures like SFTP, S3, GCP, Azure, and Dir2Dir protocols.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Airflow</span><span class="tech-badge">Python</span>
+                        </div>
+                    </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="col-6 d-inline-block p-0">Business Intelligence Dashboard</h3><h5 class="col-6 d-inline-block text-right">Mar-2020 to May-2020</h5>
-            <h5>Major Technologies: Python-3.7, Flask, VueJs, Quasar</h5>
-            <p>This platform support visual, modular HTML/CSS reporting with rich chart graphing libraries and tables. Along with these we have added features like Access control, Excel/PDF download, Email alerts integration. Also, we have managed data pipelines and connectors to rationalize multiple data sources through a data engine. We have used AWS technologies like Redshift, S3, EC2, RDS to build this project.</p>
-            <p><strong>My Role:</strong> In this project my role was to develop a demo project in collaboration with a UI/UX developer team which represent sales and growth data in the form of attractive graphs.</p>
-          </div>
-        </div>
+                </div>
+            </section>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="col-6 d-inline-block p-0">ERP Solution for a small scale business</h3><h5 class="col-6 d-inline-block text-right">Jan-2020 to Feb-2020</h5>
-            <h5>Major Technologies: Python-3.7, Flask, Sqlalchemy, PostgreSQL, Angularjs</h5>
-            <p>This is a small scale platform which supports sales, inventory and tax invoicing. Also consist of a inbuilt messenger which can be used for internal communication and discussion.</p>
-            <p><strong>My Role:</strong> My responsibilities for this project includes client communication, requirement analysis, database design, flow design as well solution development</p>
-          </div>
-        </div>
+            <!-- Education Section -->
+            <section id="education">
+                <h3 class="section-title">Education</h3>
+                
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <span class="item-title">B. Tech. in Information Technology</span><br>
+                            <span class="item-org">SGGS Institute of Engineering and Technology, Nanded</span>
+                        </div>
+                        <span class="item-date">2015 - 2019</span>
+                    </div>
+                </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="col-6 d-inline-block p-0">Market Access</h3><h5 class="col-6 d-inline-block text-right">Feb-2019 to Jan-2020</h5>
-            <h5>Major Technologies: Python-2.7, Flask, AngularJs, Redshift</h5>
-            <p>A Market Access BI Dashboard for an oncology organization that includes Specialty Pharmacy details, Patient pathway, Speciality distributor details, Payer Performance, GPO and affiliation summaries.</p>
-            <p><strong>My Role:</strong> In this project my role was to communicate with the client and come up with the best possible solutions and implement them.</p>
-          </div>
-        </div>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <span class="item-title">Higher Secondary Certificate (HSC)</span><br>
+                            <span class="item-org">Blue Bells Jr College</span>
+                        </div>
+                        <span class="item-date">2013 - 2015</span>
+                    </div>
+                </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="col-6 d-inline-block p-0">CRM And Reporting System</h3><h5 class="col-6 d-inline-block text-right">Nov-2018 to Aug-2019</h5>
-            <h5>Major Technologies: Python-2.7, Flask, AngularJs, Postgres</h5>
-            <p>A simple CRM system for a specialty pharma organization that allows salespeople to log interactions, send and track emails, analyze call activity and manage marketing events. Also consists of visualization and analysis of sales and growth across top competitors.</p>
-            <p><strong>My Role:</strong> In this project my role was to develop Front-end as well as Back-end as per the requirements received from the client.</p>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
-      <div class="w-100">
-        <h2 class="mb-5">Education</h2>
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">SGGS Institute of Engineering and Technology, Nanded</h3>
-            <div class="subheading mb-3">Bachelor of Technology</div>
-            <div>Information Technology</div>
-            <p>CGPA: 6.07</p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">June 2015 - June 2019</span><br>
-          </div>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <div>
+                            <span class="item-title">Secondary School Certificate (SSC)</span><br>
+                            <span class="item-org">PNHS High School</span>
+                        </div>
+                        <span class="item-date">2012 - 2013</span>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Blue Bells Jr. College, Nanded</h3>
-            <div class="subheading mb-3">H.S.C.</div>
-            <div>Science Stream (Vocational: Computer Science)</div>
-            <p>Percentage: 72.15%</p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">May 2013 - May 2015</span><br>
-          </div>
+        <!-- Sidebar Section -->
+        <div class="right-column">
+            <section id="skills">
+                <h3 class="section-title">Key Skills</h3>
+                <div class="skills-container">
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">Flask</div>
+                    <div class="skill-tag">Django</div>
+                    <div class="skill-tag">FastAPI</div>
+                    <div class="skill-tag">ReactJs</div>
+                    <div class="skill-tag">Vue.Js</div>
+                    <div class="skill-tag">Apache Airflow</div>
+                    <div class="skill-tag">PostgreSQL</div>
+                    <div class="skill-tag">MongoDB</div>
+                    <div class="skill-tag">AWS Cloud</div>
+                </div>
+            </section>
         </div>
+    </main>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
-          <div class="resume-content">
-            <h3 class="mb-0">Pratibha Niketan High School, Nanded</h3>
-            <div class="subheading mb-3">S.S.C.</div>
-            <p>Percentage: 83.09%</p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">May 2012 - May 2013</span><br>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
-      <div class="w-100">
-        <h2 class="mb-5">Skills</h2>
-
-        <div class="subheading mb-3">Programming Languages</div>
-        <ul class="list-inline dev-icons">
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/python.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Python</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/flask.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Flask</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/bootstrap.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Bootstrap</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/javascript.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Javascript</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/angularjs.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Angular-Js</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/vuejs.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Vue Js</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/quasar.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Quasar</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/redshift.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">AWS Redshift</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/postgresql.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">PostgreSQL</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/mysql.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">MySQL</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/airflow.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">Apache Airflow</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/s3.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">AWS S3</span>
-          </li>
-          <li class="list-inline-item col-lg-5 col-md-12 col-xs-12 col-sm-12">
-            <img src="images/ses.png" height="50px">
-            <span style="font-size: small;font-weight: bold;vertical-align: middle;">AWS SES</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
-      <div class="w-100">
-        <h2 class="mb-5">Interests</h2>
-        <p>Apart from being a web developer I love travelling around and discover the nature I spacial enjoy going to a hill stations or sanctuary.Also I love playing Video Games.</p>
-      </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="awards">
-      <div class="w-100">
-        <h2 class="mb-5">Awards &amp; Certifications</h2>
-        <ul class="fa-ul mb-0">
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            Ranked in NCO(National Cyber Olympiad) in 2012</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            Participated in state level Science Exhibition 2012</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            Certification in C++ Programming From Seed Infotech PVT. LTD.</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            Attended workshop on IOT using Rasberrypi</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="activity">
-      <div class="w-100">
-        <h2 class="mb-5">Activities</h2>
-        <ul class="fa-ul mb-0">
-          <li>
-            <i class="fa-li fa fa-check-double text-success"></i>
-            Member of IT Hub</li>
-          <li>
-            <i class="fa-li fa fa-check-double text-success"></i>
-            Organizer of Box Cricket in our annual events</li>
-          <li>
-        </ul>
-      </div>
-    </section>
-
-  </div>
-<script>
-  loadFunction = function(){
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("mainContent").style.display = "block";
-    document.getElementById("sideNav").style.display = "block";
-  }
-  </script>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/resume.min.js"></script>
+    <footer>
+        <p>&copy; 2026 Sanket Udgirkar. Built with clean HTML & CSS.</p>
+    </footer>
 
 </body>
-
 </html>
